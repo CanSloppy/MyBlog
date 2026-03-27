@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>GDB调试使用方法 | 金灿的个人技术博客</title><meta name="author" content="CanSloppy"><meta name="copyright" content="CanSloppy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="GDB安装教程首先查看自己有没有安装GDB，如果没有安装则需要先安装 12sudo apt install gdbgdb --version  使用方法在安装完成后，对指定的可执行程序前增加gdb即可进入调试状态如图   显示如下状态则说明gdb启动程序成功，就可以对程序进行调试了！ 基础命令注：（）括号里面是该指令的全称  l(list) 行号&#x2F;函数名 —— 显示对应的code，每次1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GDB调试使用方法">
+<meta property="og:url" content="http://47.102.107.148/2025/02/13/GDB%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="金灿的个人技术博客">
+<meta property="og:description" content="GDB安装教程首先查看自己有没有安装GDB，如果没有安装则需要先安装 12sudo apt install gdbgdb --version  使用方法在安装完成后，对指定的可执行程序前增加gdb即可进入调试状态如图   显示如下状态则说明gdb启动程序成功，就可以对程序进行调试了！ 基础命令注：（）括号里面是该指令的全称  l(list) 行号&#x2F;函数名 —— 显示对应的code，每次1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://47.102.107.148/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-02-13T08:41:43.000Z">
+<meta property="article:modified_time" content="2026-03-27T07:08:10.311Z">
+<meta property="article:author" content="CanSloppy">
+<meta property="article:tag" content="Linux命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://47.102.107.148/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GDB调试使用方法",
+  "url": "http://47.102.107.148/2025/02/13/GDB%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/",
+  "image": "http://47.102.107.148/img/butterfly-icon.png",
+  "datePublished": "2025-02-13T08:41:43.000Z",
+  "dateModified": "2026-03-27T07:08:10.311Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "CanSloppy",
+      "url": "http://47.102.107.148"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://47.102.107.148/2025/02/13/GDB%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GDB调试使用方法',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">金灿的个人技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">GDB调试使用方法</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">GDB调试使用方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-13T08:41:43.000Z" title="发表于 2025-02-13 16:41:43">2025-02-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-27T07:08:10.311Z" title="更新于 2026-03-27 15:08:10">2026-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="GDB安装教程"><a href="#GDB安装教程" class="headerlink" title="GDB安装教程"></a>GDB安装教程</h2><p>首先查看自己有没有安装GDB，如果没有安装则需要先安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gdb</span><br><span class="line">gdb --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在安装完成后，对指定的可执行程序前增加gdb即可进入调试状态如图</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/53234367/1741848182644-a5c0bb17-612a-4b46-b56b-272cb4e81069.png"></p>
+<p>显示如下状态则说明gdb启动程序成功，就可以对程序进行调试了！</p>
+<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><p>注：（）括号里面是该指令的全称 </p>
+<p>l(list) 行号&#x2F;函数名 —— 显示对应的code，每次10行  </p>
+<p>r(run) —— F5【无断点直接运行、有断点从第一个断点处开始运行】  </p>
+<p>b(breakpoint) + 行号 —— 在那一行打断点  </p>
+<p>b 源文件：函数名 —— 在该函数的第一行打上断点  </p>
+<p>b 源文件：行号 —— 在该源文件中的这行加上一个断点吧  </p>
+<p>info b —— 查看断点的信息  </p>
+<p>d(delete) + 当前要删除断点的编号 —— 删除一个断点【不可以d + 行号】  </p>
+<p>若当前没有跳出过gdb，则断点的编号会持续累加<br>d + breakpoints —— 删除所有的断点  </p>
+<p>disable b(breakpoints) —— 使所有断点无效【默认缺省】  </p>
+<p>enable b(breakpoints) —— 使所有断点有效【默认缺省】  </p>
+<p>disable b(breakpoint) + 编号 —— 使一个断点无效【禁用断点】  </p>
+<p>enable b(breakpoint) + 编号 —— 使一个断点有效【开启断点】  </p>
+<p>相当于VS中的空断点<br>enable breakpount —— 使一个断点有效【开启断电】  </p>
+<p>n(next) —— 逐过程【相当于F10，为了查找是哪个函数出错了】  </p>
+<p>s(step) —— 逐语句【相当于F11，】  </p>
+<p>bt —— 看到底层函数调用的过程【函数压栈】  </p>
+<p>set var —— 修改变量的值  </p>
+<p>p(print) 变量名 —— 打印变量值  </p>
+<p>display —— 跟踪查看一个变量，每次停下来都显示它的值【变量&#x2F;结构体…】  </p>
+<p>undisplay + 变量名编号 —— 取消对先前设置的那些变量的跟踪</p>
+<h2 id="排查问题三剑客🗡"><a href="#排查问题三剑客🗡" class="headerlink" title="排查问题三剑客🗡"></a>排查问题三剑客🗡</h2><p>until + 行号 —— 进行指定位置跳转，执行完区间代码</p>
+<p>finish —— 在一个函数内部，执行到当前函数返回，然后停下来等待命令</p>
+<p>c(continue) —— 从一个断点处，直接运行至下一个断点处【VS下不断按F5】</p>
+<h2 id="GDB命令大全"><a href="#GDB命令大全" class="headerlink" title="GDB命令大全"></a><font style="color:rgb(51, 51, 51);">GDB命令大全</font></h2><p><strong><font style="color:rgb(51, 51, 51);">list</font></strong><font style="color:rgb(51, 51, 51);"> ：显示程序中的代码，常用使用格式有： list 输出从上次调用list命令开始往后的10行程序代码。 list - 输出从上次调用list命令开始往前的10行程序代码。 list n 输出第n行附近的10行程序代码。 list function 输出函数function前后的10行程序代码。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">forward&#x2F;search</font></strong><font style="color:rgb(51, 51, 51);"> ：从当前行向后查找匹配某个字符串的程序行。使用格式： forward&#x2F;search 字符串 查找到的行号将保存在$</font><em><font style="color:rgb(51, 51, 51);">变量中，可以用print $</font></em><font style="color:rgb(51, 51, 51);">命令来查看。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">reverse-search</font></strong><font style="color:rgb(51, 51, 51);"> ：和forward&#x2F;search相反，向前查找字符串。使用格式同上。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">break</font></strong><font style="color:rgb(51, 51, 51);"> ：在程序中设置断点，当程序运行到指定行上时，会暂停执行。使用格式：</font><font style="color:rgb(51, 51, 51);"> break 要设置断点的行号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">tbreak</font></strong><font style="color:rgb(51, 51, 51);"> ：设置临时断点，在设置之后只起作用一次。使用格式：</font><font style="color:rgb(51, 51, 51);"> tbreak 要设置临时断点的行号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">clear</font></strong><font style="color:rgb(51, 51, 51);"> ：和break相反，clear用于清除断点。使用格式：</font><font style="color:rgb(51, 51, 51);"> clear 要清除的断点所在的行号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">run</font></strong><font style="color:rgb(51, 51, 51);"> ：启动程序，在run后面带上参数可以传递给正在调试的程序。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">awatch</font></strong><font style="color:rgb(51, 51, 51);"> ：用来增加一个观察点(add watch)，使用格式：</font><font style="color:rgb(51, 51, 51);"> awatch 变量或表达式</font><font style="color:rgb(51, 51, 51);"> 当表达式的值发生改变或表达式的值被读取时，程序就会停止运行。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">watch</font></strong><font style="color:rgb(51, 51, 51);"> ：与awatch类似用来设置观察点，但程序只有当表达式的值发生改变时才会停止运行。使用格 式：</font><font style="color:rgb(51, 51, 51);"> watch 变量或表达式</font><font style="color:rgb(51, 51, 51);"> 需要注意的是，awatch和watch都必须在程序运行的过程中设置观察点，即可运行run之后才能设置。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">commands</font></strong><font style="color:rgb(51, 51, 51);"> ：设置在遇到断点后执行特定的指令。使用格式有：</font><font style="color:rgb(51, 51, 51);"> commands</font><font style="color:rgb(51, 51, 51);"> 设置遇到最后一个遇到的断点时要执行的命令</font><font style="color:rgb(51, 51, 51);"> commands n</font><font style="color:rgb(51, 51, 51);"> 设置遇到断点号n时要执行的命令</font><font style="color:rgb(51, 51, 51);"> 注意，commands后面跟的是断点号，而不是断点所在的行号。</font><font style="color:rgb(51, 51, 51);"> 在输入命令后，就可以输入遇到断点后要执行的命令，每行一条命令，在输入最后一条命令后输入end就可以结束输入。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">delete</font></strong><font style="color:rgb(51, 51, 51);"> ：清除断点或自动显示的表达式。使用格式：</font><font style="color:rgb(51, 51, 51);"> delete 断点号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">disable</font></strong><font style="color:rgb(51, 51, 51);"> ：让指定断点失效。使用格式：</font><font style="color:rgb(51, 51, 51);"> disable 断点号列表</font><font style="color:rgb(51, 51, 51);"> 断点号之间用空格间隔开。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">enable</font></strong><font style="color:rgb(51, 51, 51);"> ：和disable相反，恢复失效的断点。使用格式：</font><font style="color:rgb(51, 51, 51);"> enable 断点编号列表</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">ignore</font></strong><font style="color:rgb(51, 51, 51);"> ：忽略断点。使用格式：</font><font style="color:rgb(51, 51, 51);"> ignore 断点号 忽略次数</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">condition</font></strong><font style="color:rgb(51, 51, 51);"> ：设置断点在一定条件下才能生效。使用格式：</font><font style="color:rgb(51, 51, 51);"> condition 断点号 条件表达式</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">cont&#x2F;continue</font></strong><font style="color:rgb(51, 51, 51);"> ：使程序在暂停在断点之后继续运行。使用格式：</font><font style="color:rgb(51, 51, 51);"> cont</font><font style="color:rgb(51, 51, 51);"> 跳过当前断点继续运行。</font><font style="color:rgb(51, 51, 51);"> cont n</font><font style="color:rgb(51, 51, 51);"> 跳过n次断点，继续运行。</font><font style="color:rgb(51, 51, 51);"> 当n为1时，cont 1即为cont。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">jump</font></strong><font style="color:rgb(51, 51, 51);"> ：让程序跳到指定行开始调试。使用格式：</font><font style="color:rgb(51, 51, 51);"> jump 行号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">next</font></strong><font style="color:rgb(51, 51, 51);"> ：继续执行语句，但是跳过子程序的调用。使用格式：</font><font style="color:rgb(51, 51, 51);"> next</font><font style="color:rgb(51, 51, 51);"> 执行一条语句</font><font style="color:rgb(51, 51, 51);"> next n</font><font style="color:rgb(51, 51, 51);"> 执行n条语句</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">nexti</font></strong><font style="color:rgb(51, 51, 51);"> ：单步执行语句，但和next不同的是，它会跟踪到子程序的内部，但不打印出子程序内部的语句。使用格式同上。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">step</font></strong><font style="color:rgb(51, 51, 51);"> ：与next类似，但是它会跟踪到子程序的内部，而且会显示子程序内部的执行情况。使用格式同上。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">stepi</font></strong><font style="color:rgb(51, 51, 51);"> ：与step类似，但是比step更详细，是nexti和step的结合。使用格式同上。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">whatis</font></strong><font style="color:rgb(51, 51, 51);"> ：显示某个变量或表达式的数据类型。使用格式：</font><font style="color:rgb(51, 51, 51);"> whatis 变量或表达式</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">ptype</font></strong><font style="color:rgb(51, 51, 51);"> ：和whatis类似，用于显示数据类型，但是它还可以显示typedef定义的类型等。使用格式：</font><font style="color:rgb(51, 51, 51);"> ptype 变量或表达式</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">set</font></strong><font style="color:rgb(51, 51, 51);"> ：设置程序中变量的值。使用格式：</font><font style="color:rgb(51, 51, 51);"> set 变量&#x3D;表达式</font><font style="color:rgb(51, 51, 51);"> set 变量:&#x3D;表达式</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">display</font></strong><font style="color:rgb(51, 51, 51);"> ：增加要显示值的表达式。使用格式：</font><font style="color:rgb(51, 51, 51);"> display 表达式</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">info display</font></strong><font style="color:rgb(51, 51, 51);"> ：显示当前所有的要显示值的表达式。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">delete display&#x2F;undisplay</font></strong><font style="color:rgb(51, 51, 51);"> ：删除要显示值的表达式。使用格式：</font><font style="color:rgb(51, 51, 51);"> delete display&#x2F;undisplay 表达式编号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">disable display</font></strong><font style="color:rgb(51, 51, 51);"> ：暂时不显示一个要表达式的值。使用格式：</font><font style="color:rgb(51, 51, 51);"> disable display 表达式编号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">enable display</font></strong><font style="color:rgb(51, 51, 51);"> ：与disable display相反，使用表达式恢复显示。使用格式：</font><font style="color:rgb(51, 51, 51);"> enable display 表达式编号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">print</font></strong><font style="color:rgb(51, 51, 51);"> ：打印变量或表达式的值。使用格式：</font><font style="color:rgb(51, 51, 51);"> print 变量或表达式</font><font style="color:rgb(51, 51, 51);"> 表达式中有两个符号有特殊含义：$和</font></p>
+<p><font style="color:rgb(51, 51, 51);">。 $表示给定序号的前一个序号，。 $表示给定序号的前一个序号，</font></p>
+<p><font style="color:rgb(51, 51, 51);">表示给定序号的前两个序号。</font><font style="color:rgb(51, 51, 51);"> 如果$和$$后面不带数字，则给定序号为当前序号。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">backtrace</font></strong><font style="color:rgb(51, 51, 51);"> ：打印指定个数的栈帧(stack frame)。使用格式：</font><font style="color:rgb(51, 51, 51);"> backtrace 栈帧个数</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">frame</font></strong><font style="color:rgb(51, 51, 51);"> ：打印栈帧。使用格式：</font><font style="color:rgb(51, 51, 51);"> frame 栈帧号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">info frame</font></strong><font style="color:rgb(51, 51, 51);"> ：显示当前栈帧的详细信息。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">select-frame</font></strong><font style="color:rgb(51, 51, 51);"> ：选择栈帧，选择后可以用info frame来显示栈帧信息。使用格式：</font><font style="color:rgb(51, 51, 51);"> select-frame 栈帧号</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">kill</font></strong><font style="color:rgb(51, 51, 51);"> ：结束当前程序的调试。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">quit</font></strong><font style="color:rgb(51, 51, 51);"> ：退出gdb。</font></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://47.102.107.148">CanSloppy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://47.102.107.148/2025/02/13/GDB%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">http://47.102.107.148/2025/02/13/GDB%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://47.102.107.148" target="_blank">金灿的个人技术博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/12/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%9F%A5%E8%AF%A2%E6%8C%87%E4%BB%A4/" title="内存泄漏查询指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">内存泄漏查询指令</div></div><div class="info-2"><div class="info-item-1">valgrind –leak-check&#x3D;full .&#x2F;app_name 一、真正判断内存泄露只看这 3 行你这份报告里最关键的是： 12345LEAK SUMMARY:   definitely lost: 0 bytes in 0 blocks   ✅   indirectly lost: 0 bytes in 0 blocks   ✅     possibly lost: 592 bytes in 1 blocks   still reachable: 4,731,324 bytes  ✅ 结论含义   类型 是否内存泄露 解释    definitely lost ❌ 否 真正的内存泄露（你这里是 0）   indirectly lost ❌ 否    possibly lost ⚠️ 几乎可忽略 第三方库常见   still reachable ❌ 否 程序退出时仍可访问   👉 Valgrind 官方定义：只有 **definitely lost** 才是必须修的泄露 </div></div></div></a><a class="pagination-related" href="/2025/01/04/CMake%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="CMake常用命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">CMake常用命令</div></div><div class="info-2"><div class="info-item-1">项目常用命令123cmake_minimum_required (VERSION 2.8)project (learn_cmake)add_executable(hello hello.cpp)   第一行：cmake最低版本要求2.8， 第二行：本项目的工程名 第三行：第一个变量：要生成的可执行文件名为hello，后面的参数是需要的依赖。  引用库命令123set(FFMPEG4_DIR $&#123;CMAKE_SOURCE_DIR&#125;/3rdpart_lab/opencv_ffmpeg/win64/ffmpeg-6.1)include_directories($&#123;FFMPEG4_DIR&#125;/include)link_directories($&#123;FFMPEG4_DIR&#125;/lib)   第一行：设置地址 第二行：引用头文件 第三行：引用库  复制文件命令123456789add_custom_command(TARGET $&#123;PROJECT_NAME&#125; POST_BUILD    COMMAND $&#123;C...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/11/unbantu%E4%B8%8A%E6%9F%A5%E7%9C%8B%E4%B8%B2%E5%8F%A3%E6%96%B9%E6%B3%95/" title="unbantu上查看串口方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-11</div><div class="info-item-2">unbantu上查看串口方法</div></div><div class="info-2"><div class="info-item-1">在 Ubuntu 下查看串口连接的几种方法如下： 1. 查看可用串口设备使用以下命令列出所有可用的串口设备： 1ls /dev/ttyS* /dev/ttyUSB* /dev/ttyACM*  常见的串口设备：  /dev/ttyS* → 传统串口（如 COM1、COM2） /dev/ttyUSB* → USB 转串口设备 /dev/ttyACM* → 现代 USB CDC 设备（如某些开发板）  2. 查看串口设备的详细信息1dmesg | grep tty  如果插入 USB 串口设备，执行 dmesg 命令可以看到新的设备被分配的端口。 3. 使用 udevadm 查询设备信息1udevadm info -q property -n /dev/ttyUSB0  将 /dev/ttyUSB0 替换为你的设备端口。 4. 查看设备是否被识别1lsusb  这个命令会列出所有 USB 设备，查找你的串口转换器是否被正确识别。 5. 检查设备占用情况1lsof | grep ttyUSB  或者： 1sudo fuser -v /dev/ttyUSB0  可以查看是否有进程正在占用...</div></div></div></a><a class="pagination-related" href="/2025/05/12/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%9F%A5%E8%AF%A2%E6%8C%87%E4%BB%A4/" title="内存泄漏查询指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-12</div><div class="info-item-2">内存泄漏查询指令</div></div><div class="info-2"><div class="info-item-1">valgrind –leak-check&#x3D;full .&#x2F;app_name 一、真正判断内存泄露只看这 3 行你这份报告里最关键的是： 12345LEAK SUMMARY:   definitely lost: 0 bytes in 0 blocks   ✅   indirectly lost: 0 bytes in 0 blocks   ✅     possibly lost: 592 bytes in 1 blocks   still reachable: 4,731,324 bytes  ✅ 结论含义   类型 是否内存泄露 解释    definitely lost ❌ 否 真正的内存泄露（你这里是 0）   indirectly lost ❌ 否    possibly lost ⚠️ 几乎可忽略 第三方库常见   still reachable ❌ 否 程序退出时仍可访问   👉 Valgrind 官方定义：只有 **definitely lost** 才是必须修的泄露 </div></div></div></a><a class="pagination-related" href="/2025/07/28/%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E6%97%A0%E7%BD%91%E7%BB%9C%E8%81%94%E7%BD%91%E6%96%B9%E6%B3%95/" title="硬件设备无网络联网方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-28</div><div class="info-item-2">硬件设备无网络联网方法</div></div><div class="info-2"><div class="info-item-1">硬件设备无网络联网方法先将硬件设备与笔记本直连 将虚拟机网络禁用 1.打开WIFI的共享网络   2.配置网卡的网络  3.将硬件设备的ip改到对应的网段 网关改为以太网IP   联网成功 可能遇到的问题还是无法上网 输入ip route查看路由   发现有多个路由 删除不需要的 sudo ip route del default via 192.168.1.1 dev enp129s0 再次ping 连接成功   </div></div></div></a><a class="pagination-related" href="/2025/09/18/%E7%BC%96%E8%AF%91%E9%81%87%E5%88%B0%E6%97%B6%E9%97%B4%E4%B8%8D%E7%AC%A6%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91%E7%9A%84%E6%83%85%E5%86%B5/" title="编译遇到时间不符导致无法编译的情况"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">编译遇到时间不符导致无法编译的情况</div></div><div class="info-2"><div class="info-item-1">1. Clock skew 警告解释 make 发现 源文件或依赖文件的时间戳比系统当前时间还“未来”。 因此 make 无法正确判断哪些文件需要重新编译。 常见原因： 系统时间被修改过（例如手动改时间或虚拟机时间不同步）。 文件是从别的系统拷贝过来的，时间戳比当前系统时间晚。 NFS&#x2F;网络挂载的文件时间与本地不同步。     2. 影响 一般情况下不会影响最终可执行文件，如果所有依赖都已经生成，程序仍然能编译运行。 但是可能导致： 某些文件没有被重新编译 出现奇怪的链接错误或旧文件被使用     3. 解决方法 校正文件时间戳  12# 回到工程根目录touch -c -t $(date +%Y%m%d%H%M) $(find . -type f)  或者直接更新所有源文件的修改时间： 1find . -exec touch &#123;&#125; +   确保系统时间正确  12date   # 检查当前时间sudo timedatectl set-ntp true   # 如果是 Linux，可以开启 NTP 同步   清理重新编译  123rm -rf bui...</div></div></div></a><a class="pagination-related" href="/2025/09/18/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%B9%E6%B3%95/" title="Linux查看日志方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">Linux查看日志方法</div></div><div class="info-2"><div class="info-item-1">在 Linux 下查看程序日志的方法取决于程序的日志输出方式和运行方式。有几种常用方式：  1. 程序输出到控制台（stdout&#x2F;stderr）如果程序直接打印日志到终端： 1./my_program   stdout（标准输出）和 stderr（标准错误）会直接显示在终端。 可以通过重定向保存日志：  1./my_program &gt; program.log 2&gt;&amp;1   &gt;：重定向 stdout 2&gt;&amp;1：把 stderr 也重定向到同一个文件  查看日志： 12tail -f program.log   # 实时查看less program.log      # 分页查看   2. 系统服务（Systemd &#x2F; daemon）如果程序作为系统服务运行： 12sudo systemctl status my_servicesudo journalctl -u my_service   systemctl status 查看服务状态和最近日志 journalctl -u 查看完整日志 加 -f 实时跟踪：  1sudo ...</div></div></div></a><a class="pagination-related" href="/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/" title="linux压缩命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-18</div><div class="info-item-2">linux压缩命令</div></div><div class="info-2"><div class="info-item-1">在 Linux 中，你可以使用多种工具进行压缩和解压，常见的格式包括 tar.gz、zip、7z 等。  **1. ****tar**（最常用的压缩&#x2F;解压工具）**（1）压缩 ****tar.gz**12345bash复制编辑tar -czvf 压缩文件.tar.gz 需要压缩的文件或文件夹  示例： 12345bash复制编辑tar -czvf my_files.tar.gz my_folder   -c：创建压缩包 -z：使用 gzip 压缩 -v：显示压缩过程（可选） -f：指定文件名   **（2）解压 ****tar.gz**12345bash复制编辑tar -xzvf 压缩文件.tar.gz  示例： 12345bash复制编辑tar -xzvf my_files.tar.gz  如果想解压到指定目录： 12345bash复制编辑tar -xzvf my_files.tar.gz -C /home/user/extracted/   **（3）压缩 ****tar.bz2**（更高压缩率）12345bash复制编辑tar -cjvf my_files.tar...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">CanSloppy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/CanSloppy"><i class="fab fa-github"></i><span>我的GitHub</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">GDB安装教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E4%B8%89%E5%89%91%E5%AE%A2%F0%9F%97%A1"><span class="toc-number">4.</span> <span class="toc-text">排查问题三剑客🗡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8"><span class="toc-number">5.</span> <span class="toc-text">GDB命令大全</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/11/unbantu%E4%B8%8A%E6%9F%A5%E7%9C%8B%E4%B8%B2%E5%8F%A3%E6%96%B9%E6%B3%95/" title="unbantu上查看串口方法">unbantu上查看串口方法</a><time datetime="2026-01-11T08:41:43.000Z" title="发表于 2026-01-11 16:41:43">2026-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%B9%E6%B3%95/" title="Linux查看日志方法">Linux查看日志方法</a><time datetime="2025-09-18T08:41:43.000Z" title="发表于 2025-09-18 16:41:43">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/%E7%BC%96%E8%AF%91%E9%81%87%E5%88%B0%E6%97%B6%E9%97%B4%E4%B8%8D%E7%AC%A6%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91%E7%9A%84%E6%83%85%E5%86%B5/" title="编译遇到时间不符导致无法编译的情况">编译遇到时间不符导致无法编译的情况</a><time datetime="2025-09-18T08:41:43.000Z" title="发表于 2025-09-18 16:41:43">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/" title="linux压缩命令">linux压缩命令</a><time datetime="2025-08-18T08:41:43.000Z" title="发表于 2025-08-18 16:41:43">2025-08-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/28/%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E6%97%A0%E7%BD%91%E7%BB%9C%E8%81%94%E7%BD%91%E6%96%B9%E6%B3%95/" title="硬件设备无网络联网方法">硬件设备无网络联网方法</a><time datetime="2025-07-28T08:41:43.000Z" title="发表于 2025-07-28 16:41:43">2025-07-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By CanSloppy</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

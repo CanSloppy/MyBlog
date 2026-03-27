@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>linux压缩命令 | 金灿的个人技术博客</title><meta name="author" content="CanSloppy"><meta name="copyright" content="CanSloppy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在 Linux 中，你可以使用多种工具进行压缩和解压，常见的格式包括 tar.gz、zip、7z 等。  **1. ****tar**（最常用的压缩&#x2F;解压工具）**（1）压缩 ****tar.gz**12345bash复制编辑tar -czvf 压缩文件.tar.gz 需要压缩的文件或文件夹  示例： 12345bash复制编辑tar -czvf my_files.tar.gz my_f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux压缩命令">
+<meta property="og:url" content="http://47.102.107.148/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="金灿的个人技术博客">
+<meta property="og:description" content="在 Linux 中，你可以使用多种工具进行压缩和解压，常见的格式包括 tar.gz、zip、7z 等。  **1. ****tar**（最常用的压缩&#x2F;解压工具）**（1）压缩 ****tar.gz**12345bash复制编辑tar -czvf 压缩文件.tar.gz 需要压缩的文件或文件夹  示例： 12345bash复制编辑tar -czvf my_files.tar.gz my_f">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://47.102.107.148/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-08-18T08:41:43.000Z">
+<meta property="article:modified_time" content="2026-03-27T07:08:08.215Z">
+<meta property="article:author" content="CanSloppy">
+<meta property="article:tag" content="Linux命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://47.102.107.148/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "linux压缩命令",
+  "url": "http://47.102.107.148/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/",
+  "image": "http://47.102.107.148/img/butterfly-icon.png",
+  "datePublished": "2025-08-18T08:41:43.000Z",
+  "dateModified": "2026-03-27T07:08:08.215Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "CanSloppy",
+      "url": "http://47.102.107.148"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://47.102.107.148/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux压缩命令',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">金灿的个人技术博客</span></a><a class="nav-page-title" href="/"><span class="site-name">linux压缩命令</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">linux压缩命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-18T08:41:43.000Z" title="发表于 2025-08-18 16:41:43">2025-08-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-27T07:08:08.215Z" title="更新于 2026-03-27 15:08:08">2026-03-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>在 Linux 中，你可以使用多种工具进行<strong>压缩和解压</strong>，常见的格式包括 <code>tar.gz</code>、<code>zip</code>、<code>7z</code> 等。</p>
+<hr>
+<h2 id="1-tar-（最常用的压缩-解压工具）"><a href="#1-tar-（最常用的压缩-解压工具）" class="headerlink" title="**1. ****tar**（最常用的压缩&#x2F;解压工具）"></a>**1. **<code>**tar**</code><strong>（最常用的压缩&#x2F;解压工具）</strong></h2><h3 id="（1）压缩-tar-gz"><a href="#（1）压缩-tar-gz" class="headerlink" title="**（1）压缩 ****tar.gz**"></a>**（1）压缩 **<code>**tar.gz**</code></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -czvf 压缩文件.tar.gz 需要压缩的文件或文件夹</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -czvf my_files.tar.gz my_folder</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-c</code>：创建压缩包</li>
+<li><code>-z</code>：使用 <code>gzip</code> 压缩</li>
+<li><code>-v</code>：显示压缩过程（可选）</li>
+<li><code>-f</code>：指定文件名</li>
+</ul>
+<hr>
+<h3 id="（2）解压-tar-gz"><a href="#（2）解压-tar-gz" class="headerlink" title="**（2）解压 ****tar.gz**"></a>**（2）解压 **<code>**tar.gz**</code></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -xzvf 压缩文件.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -xzvf my_files.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>如果想解压到指定目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -xzvf my_files.tar.gz -C /home/user/extracted/</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="（3）压缩-tar-bz2-（更高压缩率）"><a href="#（3）压缩-tar-bz2-（更高压缩率）" class="headerlink" title="**（3）压缩 ****tar.bz2**（更高压缩率）"></a>**（3）压缩 **<code>**tar.bz2**</code><strong>（更高压缩率）</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -cjvf my_files.tar.bz2 my_folder</span><br></pre></td></tr></table></figure>
+
+<p>解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">tar -xjvf my_files.tar.bz2</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-zip-（Windows-兼容）"><a href="#2-zip-（Windows-兼容）" class="headerlink" title="**2. ****zip**（Windows 兼容）"></a>**2. **<code>**zip**</code><strong>（Windows 兼容）</strong></h2><h3 id="（1）压缩"><a href="#（1）压缩" class="headerlink" title="（1）压缩"></a><strong>（1）压缩</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">zip -r my_files.zip my_folder</span><br></pre></td></tr></table></figure>
+
+<p><code>-r</code> 选项用于递归压缩整个文件夹。</p>
+<h3 id="（2）解压"><a href="#（2）解压" class="headerlink" title="（2）解压"></a><strong>（2）解压</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">unzip my_files.zip</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-7z-（高压缩比，适合大文件）"><a href="#3-7z-（高压缩比，适合大文件）" class="headerlink" title="**3. ****7z**（高压缩比，适合大文件）"></a>**3. **<code>**7z**</code><strong>（高压缩比，适合大文件）</strong></h2><p>如果没有安装 <code>7z</code>，可以先安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">sudo apt install p7zip-full</span><br></pre></td></tr></table></figure>
+
+<h3 id="（1）压缩-1"><a href="#（1）压缩-1" class="headerlink" title="（1）压缩"></a><strong>（1）压缩</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">7z a my_files.7z my_folder</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）解压-1"><a href="#（2）解压-1" class="headerlink" title="（2）解压"></a><strong>（2）解压</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">7z x my_files.7z</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-xz-（单文件高压缩）"><a href="#4-xz-（单文件高压缩）" class="headerlink" title="**4. ****xz**（单文件高压缩）"></a>**4. **<code>**xz**</code><strong>（单文件高压缩）</strong></h2><h3 id="（1）压缩-2"><a href="#（1）压缩-2" class="headerlink" title="（1）压缩"></a><strong>（1）压缩</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">xz -z myfile.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）解压-2"><a href="#（2）解压-2" class="headerlink" title="（2）解压"></a><strong>（2）解压</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">xz -d myfile.txt.xz</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="推荐使用"><a href="#推荐使用" class="headerlink" title="推荐使用"></a><strong>推荐使用</strong></h2><ul>
+<li><code>**tar.gz**</code>：最常见，适用于 Linux，<code>tar -czvf</code> &#x2F; <code>tar -xzvf</code></li>
+<li><code>**zip**</code>：跨平台兼容性好，适用于 Windows 交互，<code>zip -r</code> &#x2F; <code>unzip</code></li>
+<li><code>**7z**</code>：适用于大文件高压缩率，<code>7z a</code> &#x2F; <code>7z x</code></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://47.102.107.148">CanSloppy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://47.102.107.148/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/">http://47.102.107.148/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://47.102.107.148" target="_blank">金灿的个人技术博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/18/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%B9%E6%B3%95/" title="Linux查看日志方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Linux查看日志方法</div></div><div class="info-2"><div class="info-item-1">在 Linux 下查看程序日志的方法取决于程序的日志输出方式和运行方式。有几种常用方式：  1. 程序输出到控制台（stdout&#x2F;stderr）如果程序直接打印日志到终端： 1./my_program   stdout（标准输出）和 stderr（标准错误）会直接显示在终端。 可以通过重定向保存日志：  1./my_program &gt; program.log 2&gt;&amp;1   &gt;：重定向 stdout 2&gt;&amp;1：把 stderr 也重定向到同一个文件  查看日志： 12tail -f program.log   # 实时查看less program.log      # 分页查看   2. 系统服务（Systemd &#x2F; daemon）如果程序作为系统服务运行： 12sudo systemctl status my_servicesudo journalctl -u my_service   systemctl status 查看服务状态和最近日志 journalctl -u 查看完整日志 加 -f 实时跟踪：  1sudo ...</div></div></div></a><a class="pagination-related" href="/2025/07/28/%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E6%97%A0%E7%BD%91%E7%BB%9C%E8%81%94%E7%BD%91%E6%96%B9%E6%B3%95/" title="硬件设备无网络联网方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">硬件设备无网络联网方法</div></div><div class="info-2"><div class="info-item-1">硬件设备无网络联网方法先将硬件设备与笔记本直连 将虚拟机网络禁用 1.打开WIFI的共享网络   2.配置网卡的网络  3.将硬件设备的ip改到对应的网段 网关改为以太网IP   联网成功 可能遇到的问题还是无法上网 输入ip route查看路由   发现有多个路由 删除不需要的 sudo ip route del default via 192.168.1.1 dev enp129s0 再次ping 连接成功   </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/18/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%B9%E6%B3%95/" title="Linux查看日志方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">Linux查看日志方法</div></div><div class="info-2"><div class="info-item-1">在 Linux 下查看程序日志的方法取决于程序的日志输出方式和运行方式。有几种常用方式：  1. 程序输出到控制台（stdout&#x2F;stderr）如果程序直接打印日志到终端： 1./my_program   stdout（标准输出）和 stderr（标准错误）会直接显示在终端。 可以通过重定向保存日志：  1./my_program &gt; program.log 2&gt;&amp;1   &gt;：重定向 stdout 2&gt;&amp;1：把 stderr 也重定向到同一个文件  查看日志： 12tail -f program.log   # 实时查看less program.log      # 分页查看   2. 系统服务（Systemd &#x2F; daemon）如果程序作为系统服务运行： 12sudo systemctl status my_servicesudo journalctl -u my_service   systemctl status 查看服务状态和最近日志 journalctl -u 查看完整日志 加 -f 实时跟踪：  1sudo ...</div></div></div></a><a class="pagination-related" href="/2025/01/04/CMake%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="CMake常用命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-04</div><div class="info-item-2">CMake常用命令</div></div><div class="info-2"><div class="info-item-1">项目常用命令123cmake_minimum_required (VERSION 2.8)project (learn_cmake)add_executable(hello hello.cpp)   第一行：cmake最低版本要求2.8， 第二行：本项目的工程名 第三行：第一个变量：要生成的可执行文件名为hello，后面的参数是需要的依赖。  引用库命令123set(FFMPEG4_DIR $&#123;CMAKE_SOURCE_DIR&#125;/3rdpart_lab/opencv_ffmpeg/win64/ffmpeg-6.1)include_directories($&#123;FFMPEG4_DIR&#125;/include)link_directories($&#123;FFMPEG4_DIR&#125;/lib)   第一行：设置地址 第二行：引用头文件 第三行：引用库  复制文件命令123456789add_custom_command(TARGET $&#123;PROJECT_NAME&#125; POST_BUILD    COMMAND $&#123;C...</div></div></div></a><a class="pagination-related" href="/2025/07/28/%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E6%97%A0%E7%BD%91%E7%BB%9C%E8%81%94%E7%BD%91%E6%96%B9%E6%B3%95/" title="硬件设备无网络联网方法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-28</div><div class="info-item-2">硬件设备无网络联网方法</div></div><div class="info-2"><div class="info-item-1">硬件设备无网络联网方法先将硬件设备与笔记本直连 将虚拟机网络禁用 1.打开WIFI的共享网络   2.配置网卡的网络  3.将硬件设备的ip改到对应的网段 网关改为以太网IP   联网成功 可能遇到的问题还是无法上网 输入ip route查看路由   发现有多个路由 删除不需要的 sudo ip route del default via 192.168.1.1 dev enp129s0 再次ping 连接成功   </div></div></div></a><a class="pagination-related" href="/2025/09/18/%E7%BC%96%E8%AF%91%E9%81%87%E5%88%B0%E6%97%B6%E9%97%B4%E4%B8%8D%E7%AC%A6%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91%E7%9A%84%E6%83%85%E5%86%B5/" title="编译遇到时间不符导致无法编译的情况"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-18</div><div class="info-item-2">编译遇到时间不符导致无法编译的情况</div></div><div class="info-2"><div class="info-item-1">1. Clock skew 警告解释 make 发现 源文件或依赖文件的时间戳比系统当前时间还“未来”。 因此 make 无法正确判断哪些文件需要重新编译。 常见原因： 系统时间被修改过（例如手动改时间或虚拟机时间不同步）。 文件是从别的系统拷贝过来的，时间戳比当前系统时间晚。 NFS&#x2F;网络挂载的文件时间与本地不同步。     2. 影响 一般情况下不会影响最终可执行文件，如果所有依赖都已经生成，程序仍然能编译运行。 但是可能导致： 某些文件没有被重新编译 出现奇怪的链接错误或旧文件被使用     3. 解决方法 校正文件时间戳  12# 回到工程根目录touch -c -t $(date +%Y%m%d%H%M) $(find . -type f)  或者直接更新所有源文件的修改时间： 1find . -exec touch &#123;&#125; +   确保系统时间正确  12date   # 检查当前时间sudo timedatectl set-ntp true   # 如果是 Linux，可以开启 NTP 同步   清理重新编译  123rm -rf bui...</div></div></div></a><a class="pagination-related" href="/2025/05/12/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%9F%A5%E8%AF%A2%E6%8C%87%E4%BB%A4/" title="内存泄漏查询指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-12</div><div class="info-item-2">内存泄漏查询指令</div></div><div class="info-2"><div class="info-item-1">valgrind –leak-check&#x3D;full .&#x2F;app_name 一、真正判断内存泄露只看这 3 行你这份报告里最关键的是： 12345LEAK SUMMARY:   definitely lost: 0 bytes in 0 blocks   ✅   indirectly lost: 0 bytes in 0 blocks   ✅     possibly lost: 592 bytes in 1 blocks   still reachable: 4,731,324 bytes  ✅ 结论含义   类型 是否内存泄露 解释    definitely lost ❌ 否 真正的内存泄露（你这里是 0）   indirectly lost ❌ 否    possibly lost ⚠️ 几乎可忽略 第三方库常见   still reachable ❌ 否 程序退出时仍可访问   👉 Valgrind 官方定义：只有 **definitely lost** 才是必须修的泄露 </div></div></div></a><a class="pagination-related" href="/2025/06/13/%E9%80%9A%E8%BF%87VSCode%E8%BF%9C%E7%A8%8BSSH%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="通过VSCode远程SSH连接服务器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-13</div><div class="info-item-2">通过VSCode远程SSH连接服务器</div></div><div class="info-2"><div class="info-item-1">首先打开VSCode，点击右下角的按钮  选择连接到主机  选择添加新的SSH主机  输入ssh命令 例：用户名是root IP是192.168.100.249 则输入：ssh &#x72;&#111;&#111;&#x74;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#x36;&#x38;&#x2e;&#x31;&#48;&#x30;&#x2e;&#50;&#x34;&#57; 输入完成后回车   显示已添加主机 点击连接 输入密码  输入密码后回车，如果第一次连接则会下载一些默认插件，耐心等待即可 连接成功如下图所示左下角显示IP则为连接成功   </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">CanSloppy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/CanSloppy"><i class="fab fa-github"></i><span>我的GitHub</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-tar-%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8E%8B%E7%BC%A9-%E8%A7%A3%E5%8E%8B%E5%B7%A5%E5%85%B7%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">**1. ****tar**（最常用的压缩&#x2F;解压工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8E%8B%E7%BC%A9-tar-gz"><span class="toc-number">1.1.</span> <span class="toc-text">**（1）压缩 ****tar.gz**</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E8%A7%A3%E5%8E%8B-tar-gz"><span class="toc-number">1.2.</span> <span class="toc-text">**（2）解压 ****tar.gz**</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%8E%8B%E7%BC%A9-tar-bz2-%EF%BC%88%E6%9B%B4%E9%AB%98%E5%8E%8B%E7%BC%A9%E7%8E%87%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">**（3）压缩 ****tar.bz2**（更高压缩率）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-zip-%EF%BC%88Windows-%E5%85%BC%E5%AE%B9%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">**2. ****zip**（Windows 兼容）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8E%8B%E7%BC%A9"><span class="toc-number">2.1.</span> <span class="toc-text">（1）压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E8%A7%A3%E5%8E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">（2）解压</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7z-%EF%BC%88%E9%AB%98%E5%8E%8B%E7%BC%A9%E6%AF%94%EF%BC%8C%E9%80%82%E5%90%88%E5%A4%A7%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">**3. ****7z**（高压缩比，适合大文件）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8E%8B%E7%BC%A9-1"><span class="toc-number">3.1.</span> <span class="toc-text">（1）压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E8%A7%A3%E5%8E%8B-1"><span class="toc-number">3.2.</span> <span class="toc-text">（2）解压</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-xz-%EF%BC%88%E5%8D%95%E6%96%87%E4%BB%B6%E9%AB%98%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">**4. ****xz**（单文件高压缩）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8E%8B%E7%BC%A9-2"><span class="toc-number">4.1.</span> <span class="toc-text">（1）压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E8%A7%A3%E5%8E%8B-2"><span class="toc-number">4.2.</span> <span class="toc-text">（2）解压</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">推荐使用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/11/unbantu%E4%B8%8A%E6%9F%A5%E7%9C%8B%E4%B8%B2%E5%8F%A3%E6%96%B9%E6%B3%95/" title="unbantu上查看串口方法">unbantu上查看串口方法</a><time datetime="2026-01-11T08:41:43.000Z" title="发表于 2026-01-11 16:41:43">2026-01-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E6%96%B9%E6%B3%95/" title="Linux查看日志方法">Linux查看日志方法</a><time datetime="2025-09-18T08:41:43.000Z" title="发表于 2025-09-18 16:41:43">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/%E7%BC%96%E8%AF%91%E9%81%87%E5%88%B0%E6%97%B6%E9%97%B4%E4%B8%8D%E7%AC%A6%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E7%BC%96%E8%AF%91%E7%9A%84%E6%83%85%E5%86%B5/" title="编译遇到时间不符导致无法编译的情况">编译遇到时间不符导致无法编译的情况</a><time datetime="2025-09-18T08:41:43.000Z" title="发表于 2025-09-18 16:41:43">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/18/linux%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4/" title="linux压缩命令">linux压缩命令</a><time datetime="2025-08-18T08:41:43.000Z" title="发表于 2025-08-18 16:41:43">2025-08-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/28/%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E6%97%A0%E7%BD%91%E7%BB%9C%E8%81%94%E7%BD%91%E6%96%B9%E6%B3%95/" title="硬件设备无网络联网方法">硬件设备无网络联网方法</a><time datetime="2025-07-28T08:41:43.000Z" title="发表于 2025-07-28 16:41:43">2025-07-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By CanSloppy</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
